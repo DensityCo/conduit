@@ -22,9 +22,9 @@ export function addRoute(path, action) {
 }
 
 // Helper to perform navigation
-export function handle(path?) {
+export function handle(path) {
   path = path || window.location.hash.slice(1).replace(/(^\/|\/$)/, '');
-  const route = routes.find(route => route.regexp.test(path));
+  const route = routes.reduce((acc, next) => next.regexp.test(path) ? next : acc, null);
   if (route) {
     const params = route.regexp.exec(path).slice(1);
     if (store) {
@@ -38,8 +38,8 @@ export function handle(path?) {
 }
 
 // Helper to "navigate" (really just sets window.location.hash)
-export function navigate(path?, params?) {
-  const route = routes.find(route => route.regexp.test(path));
+export function navigate(path, params) {
+  const route = routes.reduce((acc, next) => next.regexp.test(path) ? next : acc, null);
   if (route) {
     window.location.hash = `/${route.generate(params)}`;
   } else {
