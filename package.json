@@ -1,0 +1,32 @@
+{
+  "name": "@density/route-js",
+  "version": "0.0.1",
+  "description": "A small router for Redux web apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DensityCo/route-js.git"
+  },
+  "keywords": [
+    "router",
+    "redux",
+    "react",
+    "js",
+    "url"
+  ],
+  "author": "Gus Cost",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/DensityCo/route-js/issues"
+  },
+  "homepage": "https://github.com/DensityCo/route-js#readme",
+  "dependencies": {
+    "path-to-regexp": "^1.7.0"
+  },
+  "publishConfig": {
+    "registry": "http://npmregistry.density.rodeo"
+  }
+}
