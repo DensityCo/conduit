@@ -1,32 +1,18 @@
 import * as pathToRegexp from 'path-to-regexp';
 
-// Keep all data for routes in this object
-const routes = [];
-let store = null;
-
-// Set the store reference
-export function setStore(store) {
-  store = store;
+// Check a path against internal route list
+function checkPath (routes, path) {
+  return routes.reduce(function (acc, next) { 
+    return next.regexp.test(path) ? next : acc;
+  }, null);
 }
 
-// Add a route to the above collection
-export function addRoute(path, action) {
-  const keys = [];
-  routes.push({
-    path: path,
-    keys: keys,
-    regexp: pathToRegexp(path, keys),
-    generate: pathToRegexp.compile(path),
-    action: action
-  });
-}
-
-// Helper to perform navigation
-export function handle(path) {
+// Helper to handle navigation events
+export function handle(routes, store, path) {
   path = path || window.location.hash.slice(1).replace(/(^\/|\/$)/, '');
-  const route = routes.reduce((acc, next) => next.regexp.test(path) ? next : acc, null);
+  var route = checkPath(routes, path);
   if (route) {
-    const params = route.regexp.exec(path).slice(1);
+    var params = route.regexp.exec(path).slice(1);
     if (store) {
       store.dispatch(route.action.apply(route, params));
     } else {
@@ -37,9 +23,21 @@ export function handle(path) {
   }
 }
 
-// Helper to "navigate" (really just sets window.location.hash)
-export function navigate(path, params) {
-  const route = routes.reduce((acc, next) => next.regexp.test(path) ? next : acc, null);
+// Add a route to the provided collection
+export function addRoute(routes, path, action) {
+  var keys = [];
+  routes.push({
+    path: path,
+    keys: keys,
+    regexp: pathToRegexp(path, keys),
+    generate: pathToRegexp.compile(path),
+    action: action
+  });
+}
+
+// Programmatically "navigate" (just sets window.location.hash)
+export function navigate(routes, path, params) {
+  var route = checkPath(routes, path);
   if (route) {
     window.location.hash = `/${route.generate(params)}`;
   } else {
@@ -47,18 +45,27 @@ export function navigate(path, params) {
   }
 }
 
-// Process first hash right away
-handle();
+// Create a router instance
+export default function createRouter(store) {
 
-// Listen for hash changes
-window.addEventListener('hashchange', e => handle());
+  // Array of routes
+  var routes = [];
 
-// Public API
-export default {
-  setStore: setStore,
-  addRoute: addRoute,
-  routes: routes,
-  handle: handle,
-  navigate: navigate,
+  // Bind helpers to this instance
+  var handleBound = handle.bind(this, routes, store);
+  var addRouteBound = addRoute.bind(this, routes);
+  var navigateBound = navigate.bind(this, routes);
+
+  // Listen for hash changes
+  window.addEventListener('hashchange', function (event) {
+    handle(routes, store);
+  });
+
+  // Public API
+  return {
+    routes: routes,
+    handle: handleBound,
+    addRoute: addRouteBound,
+    navigate: navigateBound,
+  };
 }
-
