@@ -1,6 +1,6 @@
 {
   "name": "@density/route-js",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A small router for Redux web apps",
   "main": "index.js",
   "scripts": {
