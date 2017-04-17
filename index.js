@@ -13,13 +13,11 @@ export function handle(routes, store, path) {
   var route = checkPath(routes, path);
   if (route) {
     var params = route.regexp.exec(path).slice(1);
-    if (store) {
-      store.dispatch(route.action.apply(route, params));
-    } else {
-      console.warn('Store not set. Make sure it has been configured with `setStore()`');
-    }
+    store.dispatch(route.action.apply(route, params));
+    return true;
   } else {
     console.warn(`Route to ${path} not found!`);
+    return false
   }
 }
 
@@ -40,8 +38,10 @@ export function navigate(routes, path, params) {
   var route = checkPath(routes, path);
   if (route) {
     window.location.hash = `/${route.generate(params)}`;
+    return true;
   } else {
     console.warn('Path not found. Make sure it has been added with `addRoute()`');
+    return false;
   }
 }
 
