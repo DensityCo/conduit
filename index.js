@@ -1,10 +1,22 @@
 import * as pathToRegexp from 'path-to-regexp';
 
 // Check a path against internal route list
-function checkPath (routes, path) {
+export function checkPath (routes, path) {
   return routes.reduce(function (acc, next) { 
     return next.regexp.test(path) ? next : acc;
   }, null);
+}
+
+// Add a route to the provided collection
+export function addRoute(routes, path, action) {
+  var keys = [];
+  routes.push({
+    path: path,
+    keys: keys,
+    regexp: pathToRegexp(path, keys),
+    generate: pathToRegexp.compile(path),
+    action: action
+  });
 }
 
 // Helper to handle navigation events
@@ -19,18 +31,6 @@ export function handle(routes, store, path) {
     console.warn(`Route to ${path} not found!`);
     return false
   }
-}
-
-// Add a route to the provided collection
-export function addRoute(routes, path, action) {
-  var keys = [];
-  routes.push({
-    path: path,
-    keys: keys,
-    regexp: pathToRegexp(path, keys),
-    generate: pathToRegexp.compile(path),
-    action: action
-  });
 }
 
 // Programmatically "navigate" (just sets window.location.hash)
@@ -52,8 +52,8 @@ export default function createRouter(store) {
   var routes = [];
 
   // Bind helpers to this instance
-  var handleBound = handle.bind(this, routes, store);
   var addRouteBound = addRoute.bind(this, routes);
+  var handleBound = handle.bind(this, routes, store);
   var navigateBound = navigate.bind(this, routes);
 
   // Listen for hash changes
@@ -64,8 +64,8 @@ export default function createRouter(store) {
   // Public API
   return {
     routes: routes,
-    handle: handleBound,
     addRoute: addRouteBound,
+    handle: handleBound,
     navigate: navigateBound,
   };
 }
