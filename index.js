@@ -1,4 +1,4 @@
-const pathToRegexp = require('path-to-regexp');
+var pathToRegexp = require('path-to-regexp');
 
 // Check a path against internal route list
 export function checkPath (routes, path) {
@@ -28,7 +28,7 @@ export function handle(routes, store, path) {
     store.dispatch(route.action.apply(route, params));
     return true;
   } else {
-    console.warn(`Route to ${path} not found!`);
+    console.warn('Route to ' + path + ' not found!');
     return false
   }
 }
@@ -37,7 +37,7 @@ export function handle(routes, store, path) {
 export function navigate(routes, path, params) {
   var route = checkPath(routes, path);
   if (route) {
-    window.location.hash = `/${route.generate(params)}`;
+    window.location.hash = '/' + route.generate(params);
     return true;
   } else {
     console.warn('Path not found. Make sure it has been added with `addRoute()`');
