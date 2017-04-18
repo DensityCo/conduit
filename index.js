@@ -1,4 +1,4 @@
-import * as pathToRegexp from 'path-to-regexp';
+const pathToRegexp = require('path-to-regexp');
 
 // Check a path against internal route list
 export function checkPath (routes, path) {
