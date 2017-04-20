@@ -12,7 +12,7 @@ import store from './store';
 const router = createRouter(store);
 ```
 
-This function returns a `router` instance with the following API:
+This function returns a router instance with the following API:
 
 
 ### `router.addRoute(path, action)`
