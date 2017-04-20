@@ -11,15 +11,15 @@ This function returns a `router` instance with the following API:
 
 ### `router.addRoute(path, action)`
 
-Pass a rails-style path and a redux action into this function to register a new route. Navigation matching the provided path will dispatch the provided action. All route parameters will be passed in to the action creator in the order they appear in the path.
+Pass a rails-style path and a redux action into this function to register a new route. Paths should not have leading or trailing slashes. Any page navigation that matches the provided path will dispatch the provided action. Route parameters will be passed in as arguments to the action creator in the order they appear in the path.
 
 ### `router.navigate(path, params)`
 
-Pass a rails-style path and a params object if any params are included. The router will update the window's href.
+Pass a rails-style path and an object containing values for any route parameters. The router will generate and update `window.hash`, prepending a single forward slash before the provided path.
 
 ### `router.handle(path)`
 
-Pass a window href value to match against all routes and dispatch the matching action, passing in route parameters.
+Match `path` against all routes and dispatch the matching action, passing in route parameters. Defaults to the current value of `window.location.hash`, with any leading and trailing slashes stripped out.
 
 ## Development
 
