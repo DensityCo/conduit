@@ -21,7 +21,7 @@ Pass a rails-style path and a Redux action into this function to register a new 
 
 ### `router.navigate(path, params)`
 
-Pass a rails-style path and an object containing values for any route parameters. The router will generate a new hash value and update `window.hash`, prepending a single forward slash.
+Pass a rails-style path and an object containing values for any route parameters. The router will generate a new hash value and update `window.location.hash`, prepending a single forward slash.
 
 ### `router.handle(path)`
 
