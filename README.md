@@ -3,12 +3,14 @@ A small routing adapter for Redux web apps
 
 ## API
 
-```
+The default export is a function `createRouter` which takes a single `store` argument. Pass a reference to your Redux store into this function and the router will use it to dispatch navigation actions.
+
+```JavaScript
 import createRouter from '@density/route-js';
+import store from './store';
+
 const router = createRouter(store);
 ```
-
-The default export is a function `createRouter` which takes a single `store` argument. Pass a reference to your Redux store into this function and the router will use it to dispatch navigation actions.
 
 This function returns a `router` instance with the following API:
 
