@@ -15,7 +15,7 @@ const bar = () => ({type: "BAR"});
 
 const router = createRouter(store);
 
-router.addRoute("", {dispatch: slash});
+router.addRoute("", {transition: slash});
 router.addRoute("foo", {
   beforeTransition: () => {
     return {type: "DISPATCHED_BEFORE_URL_CHANGE_TO_FOO"}
