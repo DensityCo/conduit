@@ -1,5 +1,10 @@
-# route-js
-A small routing adapter for Redux web apps
+# Conduit
+A small routing adapter for Redux web apps.
+
+[![CircleCI](https://circleci.com/gh/DensityCo/conduit.svg?style=svg)](https://circleci.com/gh/DensityCo/conduit)
+[![Dependency Status](https://david-dm.org/densityco/conduit.svg)](https://david-dm.org/densityco/conduit)
+[![Package Version](https://img.shields.io/npm/v/@density/conduit.svg)](https://npmjs.com/@density/conduit)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 ## API
 
