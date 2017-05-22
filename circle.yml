@@ -1,0 +1,12 @@
+test:
+  override:
+    - /bin/true
+  post:
+    - |
+      if [ "$CIRCLE_BRANCH" == "master" ]; then
+        echo "Trying to publish package, if it fails then this verison has already been published."
+        make publish
+      else
+        echo "Packages are only published to npm on branch 'master'."
+      fi
+      exit 0
