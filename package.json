@@ -1,5 +1,5 @@
 {
-  "name": "@density/route-js",
+  "name": "@density/conduit",
   "version": "0.2.1",
   "description": "A small router for Redux web apps",
   "main": "dist/index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DensityCo/route-js.git"
+    "url": "git+https://github.com/DensityCo/conduit.git"
   },
   "keywords": [
     "router",
@@ -20,14 +20,11 @@
   "author": "Gus Cost",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/DensityCo/route-js/issues"
+    "url": "https://github.com/DensityCo/conduit/issues"
   },
-  "homepage": "https://github.com/DensityCo/route-js#readme",
+  "homepage": "https://github.com/DensityCo/conduit#readme",
   "dependencies": {
     "path-to-regexp": "^1.7.0"
-  },
-  "publishConfig": {
-    "registry": "http://npmregistry.density.rodeo"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
