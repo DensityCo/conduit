@@ -1,10 +1,13 @@
-# Conduit
-A small routing adapter for Redux web apps.
+<img src="https://cdn.rawgit.com/DensityCo/conduit/master/logo.svg" height="50" />
+
+<br />
 
 [![CircleCI](https://circleci.com/gh/DensityCo/conduit.svg?style=svg)](https://circleci.com/gh/DensityCo/conduit)
 [![Dependency Status](https://david-dm.org/densityco/conduit.svg)](https://david-dm.org/densityco/conduit)
 [![Package Version](https://img.shields.io/npm/v/@density/conduit.svg)](https://npmjs.com/@density/conduit)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
+
+A small routing adapter for Redux web apps.
 
 ## API
 
