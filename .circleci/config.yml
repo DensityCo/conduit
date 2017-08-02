@@ -1,0 +1,24 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:6.11
+
+    steps:
+      - run:
+          name: "Add npm token"
+          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+
+      - run:
+          name: "Publish to npm"
+          command: |
+            if [ "$CIRCLE_BRANCH" == "master" ]; then
+              echo "Trying to publish package, if it fails then this verison has already been published."
+              set +e
+              make publish
+              set -e
+            else
+              echo "Packages are only published to npm on branch 'master'."
+            fi
+            exit 0
