@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/DensityCo/conduit#readme",
   "dependencies": {
+    "lodash.debounce": "^4.0.8",
     "path-to-regexp": "^1.7.0"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 var pathToRegexp = require('path-to-regexp');
+var debounce = require('lodash.debounce');
 
 // Check a path against internal route list
 export function checkPath (routes, path) {
@@ -57,9 +58,9 @@ export default function createRouter(store) {
   var navigateBound = navigate.bind(this, routes);
 
   // Listen for hash changes
-  window.addEventListener('hashchange', function (event) {
+  window.addEventListener('hashchange', debounce(function (event) {
     handle(routes, store);
-  });
+  }, 250, {leading: true}));
 
   // Public API
   return {
