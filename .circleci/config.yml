@@ -13,12 +13,12 @@ jobs:
       - run:
           name: "Publish to npm"
           command: |
-            if [ "$CIRCLE_BRANCH" == "master" ]; then
+            if [ "$CIRCLE_BRANCH" == "trunk" ]; then
               echo "Trying to publish package, if it fails then this verison has already been published."
               set +e
               make publish
               set -e
             else
-              echo "Packages are only published to npm on branch 'master'."
+              echo "Packages are only published to npm on branch 'trunk'."
             fi
             exit 0
