@@ -25,12 +25,21 @@ export function handle(routes, store, path) {
   path = path || window.location.hash.slice(1).replace(/(^\/|\/$)/, '');
   var route = checkPath(routes, path);
   if (route) {
-    var params = route.regexp.exec(path).slice(1);
-    store.dispatch(route.action.apply(route, params));
+    const params = route.regexp.exec(path).slice(1);
+    const action = route.action.apply(route, params);
+    if (action) {
+      store.dispatch(action);
+    }
     return true;
   } else {
     console.warn('Route to ' + path + ' not found!');
     return false
+  }
+}
+
+export function redirect(url) {
+  return () => {
+    window.location.href = url;
   }
 }
 

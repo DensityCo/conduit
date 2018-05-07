@@ -35,6 +35,19 @@ Pass a rails-style path and an object containing values for any route parameters
 
 Match a literal `path` (no colons) against all routes and dispatch the matching action, passing in route parameters. `path` defaults to `window.location.hash` with leading and trailing slashes stripped out.
 
+## `redirect`
+
+Redirect the user to a different route instead of dispatching an action. This is useful anytime a
+redirects is desired, such as an old route being deprecated.
+
+```JavaScript
+import createRouter from '@density/conduit';
+import store from './store';
+
+const router = createRouter(store);
+router.addRoute('foo/bar', redirect('hello/world'));
+router.addRoute('hello/world', () => ({type: "NAVIGATE_TO_HELLO_WORLD"}) );
+```
 
 ## Development
 
