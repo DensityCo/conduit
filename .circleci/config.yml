@@ -4,7 +4,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:6.11
-
+    resource_class: small
     steps:
       - run:
           name: "Add npm token"
