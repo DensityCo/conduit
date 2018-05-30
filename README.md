@@ -41,7 +41,7 @@ Redirect the user to a different route instead of dispatching an action. This is
 redirects is desired, such as an old route being deprecated.
 
 ```JavaScript
-import createRouter from '@density/conduit';
+import createRouter, { redirect } from '@density/conduit';
 import store from './store';
 
 const router = createRouter(store);
