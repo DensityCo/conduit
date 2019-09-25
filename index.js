@@ -21,12 +21,12 @@ export function addRoute(routes, path, action) {
 }
 
 // Helper to handle navigation events
-export function handle(routes, store, path) {
+export function handle(routes, dispatch, path) {
   path = path || window.location.hash.slice(1).replace(/(^\/|\/$)/, '');
   var route = checkPath(routes, path);
   if (route) {
     var params = route.regexp.exec(path).slice(1);
-    store.dispatch(route.action.apply(route, params));
+    dispatch(route.action.apply(route, params));
     return true;
   } else {
     console.warn('Route to ' + path + ' not found!');
@@ -47,19 +47,19 @@ export function navigate(routes, path, params) {
 }
 
 // Create a router instance
-export default function createRouter(store) {
+export default function createRouter(dispatch) {
 
   // Array of routes
   var routes = [];
 
   // Bind helpers to this instance
   var addRouteBound = addRoute.bind(this, routes);
-  var handleBound = handle.bind(this, routes, store);
+  var handleBound = handle.bind(this, routes, dispatch);
   var navigateBound = navigate.bind(this, routes);
 
   // Listen for hash changes
   window.addEventListener('hashchange', debounce(function (event) {
-    handle(routes, store);
+    handle(routes, dispatch);
   }, 250, {leading: true}));
 
   // Public API
